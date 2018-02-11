@@ -1,4 +1,6 @@
 from sklearn import tree
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.neighbors import KNeighborsClassifier
 
 # height, width, show size
 
@@ -30,10 +32,20 @@ y = ['male',
      'female',
      'female']
 
-clf = tree.DecisionTreeClassifier()
+clfTree = tree.DecisionTreeClassifier()
+clfQuad = QuadraticDiscriminantAnalysis()
+clfKNeighbors = KNeighborsClassifier()
 
-clf = clf.fit(x,y)
+clfTreeFitted = clfTree.fit(x,y)
+clfQuadFitted = clfQuad.fit(x,y)
+clfKNeighborsFitted = clfKNeighbors.fit(x,y)
 
-prediction = clf.predict([[192, 84, 45], [143, 42, 36]])
+predictionValues = [[192, 84, 45], [143, 42, 36]]
 
-print(prediction)
+predictionTree = clfTreeFitted.predict(predictionValues)
+predictionQuad = clfQuadFitted.predict(predictionValues)
+predictionKNeighbors = clfKNeighborsFitted.predict(predictionValues)
+
+print(predictionTree)
+print(predictionQuad)
+print(predictionKNeighbors)
