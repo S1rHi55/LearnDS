@@ -2,8 +2,6 @@ from sklearn import tree
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
 
-# height, width, show size
-
 x = [
     [181, 80, 41],
     [159, 78, 42],
