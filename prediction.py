@@ -1,13 +1,16 @@
 from sklearn import tree
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
 
 x = [
     [181, 80, 41],
     [159, 78, 42],
     [182, 70, 41],
     [158, 68, 39],
-    [184, 82, 41], [193, 91, 45], [182, 79, 41],
+    [184, 82, 41],
+    [193, 91, 45],
+    [182, 79, 41],
     [163, 78, 39],
     [181, 79, 41], 
     [169, 78, 42],
@@ -21,7 +24,9 @@ y = ['male',
      'female',
      'male',
      'female',
-     'male','male','male',
+     'male',
+     'male',
+     'male',
      'female',
      'male',
      'female',
@@ -30,20 +35,16 @@ y = ['male',
      'female',
      'female']
 
-clfTree = tree.DecisionTreeClassifier()
-clfQuad = QuadraticDiscriminantAnalysis()
-clfKNeighbors = KNeighborsClassifier()
-
-clfTreeFitted = clfTree.fit(x,y)
-clfQuadFitted = clfQuad.fit(x,y)
-clfKNeighborsFitted = clfKNeighbors.fit(x,y)
-
 predictionValues = [[192, 84, 45], [143, 42, 36]]
 
-predictionTree = clfTreeFitted.predict(predictionValues)
-predictionQuad = clfQuadFitted.predict(predictionValues)
-predictionKNeighbors = clfKNeighborsFitted.predict(predictionValues)
+def useModel(name, model):
+    fitModel = model.fit(x,y)
+    accuracy = accuracy_score(y, fitModel.predict(x)) * 100
+    print(name)
+    print(accuracy)
+    predictNew = fitModel.predict(predictionValues)
+    print(predictNew)
 
-print(predictionTree)
-print(predictionQuad)
-print(predictionKNeighbors)
+useModel('tree', tree.DecisionTreeClassifier())
+useModel('quadratic', QuadraticDiscriminantAnalysis())
+useModel('KNeighbors', KNeighborsClassifier())
